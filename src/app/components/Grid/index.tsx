@@ -13,8 +13,8 @@ const innerGridWidth = gridWidth - (gridMarginX * 2);
 const innerGridHeight = gridHeight - (gridMarginY * 2);
 
 const padding = 1;
-const cellSizeX = (innerGridWidth / gridCountX) - padding;
-const cellSizeY = (innerGridHeight / gridCountY) - padding;
+const cellSizeX = (innerGridWidth / gridCountX) - (padding*2);
+const cellSizeY = (innerGridHeight / gridCountY) - (padding*2);
 
 const Container = styled.div`
   width: ${gridWidth}px;
@@ -47,7 +47,9 @@ const Pulsator = styled.div`
 const GridWrapper = styled.div`
   z-index: 3;
   position: relative;
-  margin: ${gridMarginY}px ${gridMarginX}px;
+  width: ${gridWidth}px;
+  height: ${gridHeight}px ;
+  padding: ${gridMarginY - (padding*2)}px ${gridMarginX - (padding*2)}px;
 `
 
 interface CellProps {
@@ -80,7 +82,7 @@ export function Grid(props) {
   const drawRow = (row: FibonacciRow, indexY) => {
     return row.cells.map((cell: FibonacciCell, indexX: number) => {
       return <Cell
-        width={cellSizeX}
+        width={cellSizeX - padding}
         height={cellSizeY}
         padding={padding}
         color={cell.activeColor || 'white'}
