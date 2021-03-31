@@ -11,6 +11,7 @@ export default (state: FibonacciGame, action) => {
        * Adjust numbers
        */
       const cellChangeColor = '#f1ee39';
+
       newState.grid[action.row].cells = newState.grid[action.row].cells.map((cell) => {
         cell.activeNumber = cell.activeNumber ? cell.activeNumber + 1 : 1;
         cell.activeColor = cellChangeColor;
@@ -47,6 +48,7 @@ export default (state: FibonacciGame, action) => {
 
       newState.grid = newState.grid.map((row, rowIndex) => {
         row.cells = row.cells.map((cell: FibonacciCell): FibonacciCell => {
+
           /**
            * Check forward
            */
@@ -54,7 +56,7 @@ export default (state: FibonacciGame, action) => {
             cell, getNeighbours(cell.cellNumber, row)
           )
           if(fibonacciMatched){
-            fibonacciMatches.concat(fibonacciMatched);
+            fibonacciMatches = [...fibonacciMatches, ...fibonacciMatched]
           }
 
           /**
@@ -64,7 +66,7 @@ export default (state: FibonacciGame, action) => {
             cell, getNeighbours(cell.cellNumber, row, 'backwards')
           )
           if(fibonacciMatched){
-            fibonacciMatches.concat(fibonacciMatched);
+            fibonacciMatches = [...fibonacciMatches, ...fibonacciMatched]
           }
 
           /**
@@ -78,6 +80,14 @@ export default (state: FibonacciGame, action) => {
         })
 
         return row;
+      })
+
+      const cellMatchedColor = '#3ff139';
+
+      console.log('fibonacciMatches')
+      console.log(fibonacciMatches)
+      fibonacciMatches.forEach((cell) => {
+        newState.grid[cell.rowNumber].cells[cell.cellNumber].activeColor = cellMatchedColor;
       })
 
       return newState;

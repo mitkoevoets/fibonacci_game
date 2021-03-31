@@ -3,7 +3,14 @@ import { fibonacciGenerator } from './fibonacciGenerator';
 
 function fibonacciMatch(fibonacciRange: number[], cellRange: FibonacciCell[]): boolean {
   let match: boolean = true;
-
+  if(cellRange[0].activeNumber === 1){
+    // console.log('cellRange')
+    // console.log(cellRange[0])
+    // console.log(cellRange[1])
+    // console.log(cellRange[2])
+    // console.log(cellRange[3])
+    // console.log(cellRange[4])
+  }
 
   cellRange.forEach((cell: FibonacciCell, index) => {
     if(fibonacciRange[index] !== cell.activeNumber) {
@@ -26,8 +33,6 @@ export function fibonacciCheck(cell: FibonacciCell, cellsToCompare: FibonacciCel
    * Find if cell number is in fibonacci
    */
   const fibonacci = fibonacciGenerator();
-
-
   const fibonacciIndex = fibonacci.indexOf(cell.activeNumber);
 
   if(!fibonacciIndex) {
