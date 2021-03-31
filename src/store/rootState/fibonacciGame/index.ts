@@ -3,6 +3,8 @@ import { initGrid } from "./initGrid";
 export interface FibonacciCell {
   activeColor: string | undefined;
   activeNumber: number | undefined;
+  cellNumber: number;
+  rowNumber: number;
 }
 
 export interface FibonacciRow {

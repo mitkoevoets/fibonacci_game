@@ -1,26 +1,25 @@
-import { FibonacciCell } from '../store/rootState/fibonacciGame';
+import { FibonacciCell, FibonacciRow } from '../store/rootState/fibonacciGame';
 import { fibonacciGenerator } from './fibonacciGenerator';
 
-export interface CellToCompare {
-  row: number;
-  cell: number;
-  activeNumber: number;
+function fibonacciMatch(fibonacciRange: number[], cellRange: FibonacciCell[]): boolean {
+  let match: boolean = true;
+
+
+  cellRange.forEach((cell: FibonacciCell, index) => {
+    if(fibonacciRange[index] !== cell.activeNumber) {
+      match = false;
+    }
+  })
+
+  return match;
 }
 
-function compareRange(fibonacciRange: number[], cellRange: number[]): boolean{
-  return fibonacciRange[0] === cellRange[0] &&
-    fibonacciRange[1] === cellRange[1] &&
-    fibonacciRange[2] === cellRange[2] &&
-    fibonacciRange[3] === cellRange[3] &&
-    fibonacciRange[4] === cellRange[4]
-}
-
-export function fibonacciCheck(cell: FibonacciCell, cellsToCompare: CellToCompare[]): boolean {
+export function fibonacciCheck(cell: FibonacciCell, cellsToCompare: FibonacciCell[]): FibonacciCell[] | undefined {
   /**
    * Check if cell has active number
    */
   if(!cell.activeNumber){
-    return false;
+    return undefined;
   }
 
   /**
@@ -32,7 +31,7 @@ export function fibonacciCheck(cell: FibonacciCell, cellsToCompare: CellToCompar
   const fibonacciIndex = fibonacci.indexOf(cell.activeNumber);
 
   if(!fibonacciIndex) {
-    return false
+    return undefined
   }
 
   /**
@@ -41,11 +40,22 @@ export function fibonacciCheck(cell: FibonacciCell, cellsToCompare: CellToCompar
     /**
      * Forward
      */
-    // compareRange()
+    if(fibonacciMatch(
+      fibonacci.slice(fibonacciIndex, fibonacciIndex + cellsToCompare.length),
+      cellsToCompare
+    )) {
+      return cellsToCompare;
+    }
 
     /**
      * Backward
      */
 
-  return false;
+  return undefined;
+}
+
+export function getNeighbours(index: number, row: FibonacciRow, direction: string = 'forward', count: number = 5): FibonacciCell[] {
+  const cells = direction === 'backward' ? row.cells.reverse() : row.cells;
+
+  return cells.slice(index, index + count);
 }

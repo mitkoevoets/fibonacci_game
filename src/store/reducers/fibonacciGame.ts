@@ -1,5 +1,6 @@
 import { FibonacciCell, FibonacciGame, gridCountX, gridCountY } from '../rootState/fibonacciGame';
 import { initGrid } from '../rootState/fibonacciGame/initGrid';
+import { fibonacciCheck, getNeighbours } from '../../utils/fibonacciCheck';
 
 export default (state: FibonacciGame, action) => {
   let newState = { ...state };
@@ -31,20 +32,7 @@ export default (state: FibonacciGame, action) => {
     case 'TRIGGER_COOLDOWN':
       newState.grid = newState.grid.map((row, index) => {
         row.cells = row.cells.map((cell): FibonacciCell => {
-          /**
-           * Check forward
-           */
-
-          /**
-           * Check backward
-           */
-
-          /**
-           * Check up
-           */
-          /**
-           * Check down
-           */
+          cell.activeColor = undefined;
 
           return cell;
         })
@@ -54,9 +42,37 @@ export default (state: FibonacciGame, action) => {
 
       return newState;
     case 'TRIGGER_FIBONACCI':
-      newState.grid = newState.grid.map((row, index) => {
-        row.cells = row.cells.map((cell): FibonacciCell => {
-          cell.activeColor = undefined;
+      let fibonacciMatches: FibonacciCell[] = [];
+      let fibonacciMatched: FibonacciCell[] | undefined = undefined;
+
+      newState.grid = newState.grid.map((row, rowIndex) => {
+        row.cells = row.cells.map((cell: FibonacciCell): FibonacciCell => {
+          /**
+           * Check forward
+           */
+          fibonacciMatched = fibonacciCheck(
+            cell, getNeighbours(cell.cellNumber, row)
+          )
+          if(fibonacciMatched){
+            fibonacciMatches.concat(fibonacciMatched);
+          }
+
+          /**
+           * Check backward
+           */
+          fibonacciMatched = fibonacciCheck(
+            cell, getNeighbours(cell.cellNumber, row, 'backwards')
+          )
+          if(fibonacciMatched){
+            fibonacciMatches.concat(fibonacciMatched);
+          }
+
+          /**
+           * Check up
+           */
+          /**
+           * Check down
+           */
 
           return cell;
         })
