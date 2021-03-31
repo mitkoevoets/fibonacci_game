@@ -7,16 +7,19 @@ export default (state: FibonacciGame, action) => {
   switch (action.type) {
     case 'CLICK_CELL':
       newState.grid[action.row].cells = newState.grid[action.row].cells.map((cell) => {
-        cell.activeNumber = cell.activeNumber ? cell.activeNumber+1 : 1;
+        cell.activeNumber = cell.activeNumber ? cell.activeNumber + 1 : 1;
 
         return cell
       })
-      // // newState.grid[action.row].cells[action.cell].activeNumber = clickedCell.activeNumber ? clickedCell.activeNumber+1 : 1;
-      // if(clickedCell.activeNumber) {
-      //   console.log(clickedCell.activeNumber)
-      // } else {
-      //   clickedCell.activeNumber
-      // }
+
+      newState.grid = newState.grid.map((row, index) => {
+        if(index !== action.row) {
+          const activeNumber = row.cells[action.cell].activeNumber || 0;
+          row.cells[action.cell].activeNumber = activeNumber + 1;
+        }
+
+        return row
+      })
 
       return newState;
     case 'CLEAR_GRID':
