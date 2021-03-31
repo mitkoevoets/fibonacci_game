@@ -93,6 +93,7 @@ export function Grid(props) {
   const drawRow = (row: FibonacciRow, indexY) => {
     return row.cells.map((cell: FibonacciCell, indexX: number) => {
       return <Cell
+        key={indexX}
         width={cellSizeX - padding}
         height={cellSizeY}
         padding={padding}
@@ -105,7 +106,7 @@ export function Grid(props) {
   const drawGrid = (grid: FibonacciRow[]) => {
     return grid.map((row: FibonacciRow, indexY: number) => {
       return (
-        <RowWrapper height={cellSizeY + (padding * 2)}>
+        <RowWrapper key={indexY} height={cellSizeY + (padding * 2)}>
           {drawRow(row, indexY)}
         </RowWrapper>
       )
