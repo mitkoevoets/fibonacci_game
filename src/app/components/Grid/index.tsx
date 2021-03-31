@@ -43,6 +43,8 @@ const Cell = styled.span`
   margin: ${(props: CellProps) => props.padding}px;
   background-color: ${(props: CellProps) => props.color};
   cursor: pointer;
+  font-size: 10px;
+  line-height: 0.8;
 `
 
 
@@ -60,7 +62,7 @@ export function Grid(props) {
         onClick={() => dispatch(
           { type: 'CLICK_CELL', row: indexY, cell: indexX }
         )}
-      >{cell.activeNumber || ''}</Cell>
+      >{cell.activeNumber || 0}</Cell>
     })
   }
 
