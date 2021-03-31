@@ -1,4 +1,4 @@
-import { FibonacciGame, gridCountX, gridCountY } from '../rootState/fibonacciGame';
+import { FibonacciCell, FibonacciGame, gridCountX, gridCountY } from '../rootState/fibonacciGame';
 import { initGrid } from '../rootState/fibonacciGame/initGrid';
 
 export default (state: FibonacciGame, action) => {
@@ -28,7 +28,19 @@ export default (state: FibonacciGame, action) => {
       })
 
       return newState;
-    case 'RUN_FIBONACCI':
+    case 'TRIGGER_COOLDOWN':
+      newState.grid = newState.grid.map((row, index) => {
+        row.cells = row.cells.map((cell): FibonacciCell => {
+          cell.activeColor = undefined;
+
+          return cell;
+        })
+
+        return row;
+      })
+
+      return newState;
+    case 'TRIGGER_FIBONACCI':
       console.log('321ewds32wq')
 
       return newState;

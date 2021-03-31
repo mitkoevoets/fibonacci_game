@@ -86,8 +86,10 @@ export function Grid(props) {
 
   const onCellClick = async (indexY, indexX) => {
     await dispatch({ type: 'CLICK_CELL', row: indexY, cell: indexX })
-    await timeout(10000);
-    await dispatch({ type: 'RUN_FIBONACCI' })
+    await timeout(2500);
+    await dispatch({ type: 'TRIGGER_COOLDOWN' })
+    // await timeout(1000);
+    // await dispatch({ type: 'TRIGGER_FIBONACCI' })
   }
 
   const drawRow = (row: FibonacciRow, indexY) => {

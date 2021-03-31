@@ -5,6 +5,9 @@ export type AppActions =
   cell: number;
 }
   | {
-  type: 'RUN_FIBONACCI';
+  type: 'TRIGGER_COOLDOWN';
+}
+  | {
+  type: 'TRIGGER_FIBONACCI';
 }
   | { type: 'CLEAR_GRID' };
