@@ -1,30 +1,57 @@
 import * as React from 'react';
 import { useStore } from "../../../store";
 import { ClearIcon } from "../ClearIcon"
-import { FibonacciCell, FibonacciRow } from "../../../store/rootState/fibonacciGame";
+import { FibonacciCell, FibonacciRow, gridCountX, gridCountY } from '../../../store/rootState/fibonacciGame';
 import styled from "styled-components";
 
-const drawGrid = (grid: FibonacciRow[]) => {
-  return grid.map((row: FibonacciRow) => {
-    return row.cells.map((cell: FibonacciCell) => {
-      return <span> TEST </span>
-    })
-  })
-}
+const gridWidth = 800;
+const gridHeight = 600;
 
-export const gridWidth = 800;
-export const gridHeight = 600;
+const gridMarginX = gridWidth / 16;
+const gridMarginY = gridHeight / 16;
+const innerGridWidth = gridWidth - gridMarginX * 2;
+const innerGridHeight = gridHeight - gridMarginY * 2;
 
-export const gridMarginX = gridWidth / 16;
-export const gridMarginY = gridHeight / 16;
-export const innerGridWidth = gridWidth - gridMarginX * 2;
-export const innerGridHeight = gridHeight - gridMarginY * 2;
+const padding = 2;
+const cellSizeX = (innerGridWidth / gridCountX) - padding;
+const cellSizeY = (innerGridHeight / gridCountY) - padding;
 
 const Container = styled.div`
   width: ${gridWidth}px;
   height: ${gridHeight}px;
   background-color: #c529cf;
 `
+
+const Wrapper = styled.div`
+  position: relative;
+`
+
+interface CellProps {
+  x: number; y: number; width: number; height: number; color: string
+}
+
+const Cell = styled.span`
+  position: absolute;
+  left: ${(props: CellProps) => props.x}px;
+  top: ${(props: CellProps) => props.y}px;
+  width: ${(props: CellProps) => props.width}px;
+  height: ${(props: CellProps) => props.height}px;
+  background-color: ${(props: CellProps) => props.color};
+`
+
+const drawGrid = (grid: FibonacciRow[]) => {
+  return grid.map((row: FibonacciRow, indexY: number) => {
+    return row.cells.map((cell: FibonacciCell, indexX: number) => {
+      return <Cell
+        x={(cellSizeX + padding) * indexX}
+        y={(cellSizeY + padding) * indexY}
+        width={cellSizeX}
+        height={cellSizeY}
+        color={cell.activeColor || 'white'}
+      >{cell.activeNumber || ''}</Cell>
+    })
+  })
+}
 
 export function Grid(props) {
   const { state, dispatch } = useStore();
@@ -38,7 +65,9 @@ export function Grid(props) {
         <ClearIcon />
       </div>
       <Container className="card-body">
-        {drawGrid(fibonacciGame.grid)}
+        <Wrapper>
+          {drawGrid(fibonacciGame.grid)}
+        </Wrapper>
       </Container>
     </div>
   );
