@@ -76,7 +76,6 @@ const drawGrid = (grid: FibonacciRow[]) => {
 export function Grid(props) {
   const { state, dispatch } = useStore();
   const { fibonacciGame } = state;
-  console.log(state.fibonacciGame)
 
   return (
     <div className="card shadow mb-4">
