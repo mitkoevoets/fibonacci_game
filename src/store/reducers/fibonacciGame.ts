@@ -1,4 +1,5 @@
-import { FibonacciGame, fibonacciGameRootState } from '../rootState/fibonacciGame';
+import { FibonacciGame, gridCountX, gridCountY } from '../rootState/fibonacciGame';
+import { initGrid } from '../rootState/fibonacciGame/initGrid';
 
 export default (state: FibonacciGame, action) => {
   let newState = { ...state };
@@ -6,13 +7,15 @@ export default (state: FibonacciGame, action) => {
   switch (action.type) {
     case 'CLICK_CELL':
       newState.grid[action.row].cells[action.cell].activeNumber = 1;
-      console.log('newState')
-      console.log(newState)
 
       return newState;
     case 'CLEAR_GRID':
-      return fibonacciGameRootState;
+      newState = { grid: initGrid(gridCountX, gridCountY) };
+
+      return newState;
     default:
       return state;
   }
+
+
 };

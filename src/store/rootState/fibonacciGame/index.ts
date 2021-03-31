@@ -16,6 +16,8 @@ export interface FibonacciGame {
 export const gridCountX = 50;
 export const gridCountY = 50;
 
+export const emptyGrid = initGrid(gridCountX, gridCountY);
+
 export const fibonacciGameRootState: FibonacciGame = {
-  grid: initGrid(gridCountX, gridCountY),
+  grid: emptyGrid,
 };

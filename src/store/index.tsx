@@ -31,7 +31,7 @@ export default function Provider({ children }) {
   useEffect(() => persistState(STORAGE_KEY, state), [state]);
 
   return (
-    <Context.Provider value={{ state, dispatch: applyMiddleware(dispatch) }}>
+    <Context.Provider value={{ state, dispatch }}>
       {children}
     </Context.Provider>
   );
