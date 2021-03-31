@@ -19,11 +19,35 @@ const cellSizeY = (innerGridHeight / gridCountY) - padding;
 const Container = styled.div`
   width: ${gridWidth}px;
   height: ${gridHeight}px;
-  background-color: #373737;
 `
 
-const Wrapper = styled.div`
+const Background = styled.div`
+  background-color: #373737;
+  position: absolute;
+  z-index: 1;
+  width: ${gridWidth}px;
+  height: ${gridHeight}px;
+`
+
+const Pulsator = styled.div`
   background-color: #c529cf;
+  animation:Pulsate 8s linear infinite;
+  @keyframes Pulsate {
+    from { opacity: 1; }
+    50% { opacity: 0; }
+    to { opacity: 1; }
+  }
+  position: absolute;
+  z-index: 2;
+  width: ${innerGridWidth}px;
+  height: ${innerGridHeight}px;
+  margin: ${gridMarginY}px ${gridMarginX}px;
+`
+
+const GridWrapper = styled.div`
+  z-index: 3;
+  position: relative;
+  margin: ${gridMarginY}px ${gridMarginX}px;
 `
 
 interface CellProps {
@@ -31,6 +55,7 @@ interface CellProps {
 }
 
 const RowWrapper = styled.div`
+  opacity: 1;
   text-align: center;
   line-height: 0.1;
   height: ${(props: { height: number }) => props.height}px;
@@ -83,9 +108,12 @@ export function Grid(props) {
         <ClearIcon />
       </div>
       <Container className="card-body">
-        <Wrapper>
+        <Background>
+          <Pulsator />
+        </Background>
+        <GridWrapper>
           {drawGrid(fibonacciGame.grid)}
-        </Wrapper>
+        </GridWrapper>
       </Container>
     </div>
   );
