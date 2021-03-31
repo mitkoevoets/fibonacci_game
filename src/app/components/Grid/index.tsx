@@ -42,40 +42,37 @@ const Cell = styled.span`
   height: ${(props: CellProps) => props.height}px;
   margin: ${(props: CellProps) => props.padding}px;
   background-color: ${(props: CellProps) => props.color};
+  cursor: pointer;
 `
 
-const drawRow = (row: FibonacciRow) => {
-  return row.cells.map((cell: FibonacciCell, indexX: number) => {
-    return <Cell
-      width={cellSizeX}
-      height={cellSizeY}
-      padding={padding}
-      color={cell.activeColor || 'white'}
-    >{cell.activeNumber || ''}</Cell>
-  })
-}
 
-const drawGrid = (grid: FibonacciRow[]) => {
-  return grid.map((row: FibonacciRow, indexY: number) => {
-    return (
-      <RowWrapper height={cellSizeY + (padding * 2)}>
-        {drawRow(row)}
-      </RowWrapper>
-    )
+export function Grid(props) {
+  const { state, dispatch } = useStore();
+  const { fibonacciGame } = state;
+
+  const drawRow = (row: FibonacciRow, indexY) => {
     return row.cells.map((cell: FibonacciCell, indexX: number) => {
       return <Cell
         width={cellSizeX}
         height={cellSizeY}
         padding={padding}
         color={cell.activeColor || 'white'}
+        onClick={() => dispatch(
+          { type: 'CLICK_CELL', row: indexY, cell: indexX }
+        )}
       >{cell.activeNumber || ''}</Cell>
     })
-  })
-}
+  }
 
-export function Grid(props) {
-  const { state, dispatch } = useStore();
-  const { fibonacciGame } = state;
+  const drawGrid = (grid: FibonacciRow[]) => {
+    return grid.map((row: FibonacciRow, indexY: number) => {
+      return (
+        <RowWrapper height={cellSizeY + (padding * 2)}>
+          {drawRow(row, indexY)}
+        </RowWrapper>
+      )
+    })
+  }
 
   return (
     <div className="card shadow mb-4">

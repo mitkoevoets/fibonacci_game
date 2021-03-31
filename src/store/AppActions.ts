@@ -1,7 +1,7 @@
-import { ReactText } from 'react';
-
 export type AppActions =
   | {
-      type: 'CLICK_GRID';
-    }
+  type: 'CLICK_CELL';
+  row: number;
+  cell: number;
+}
   | { type: 'CLEAR_GRID' };
