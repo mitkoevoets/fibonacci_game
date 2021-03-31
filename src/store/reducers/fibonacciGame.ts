@@ -6,6 +6,9 @@ export default (state: FibonacciGame, action) => {
 
   switch (action.type) {
     case 'CLICK_CELL':
+      /**
+       * Adjust numbers
+       */
       const cellChangeColor = '#f1ee39';
       newState.grid[action.row].cells = newState.grid[action.row].cells.map((cell) => {
         cell.activeNumber = cell.activeNumber ? cell.activeNumber + 1 : 1;
@@ -23,6 +26,10 @@ export default (state: FibonacciGame, action) => {
 
         return row
       })
+
+      return newState;
+    case 'RUN_FIBONACCI':
+      console.log('321ewds32wq')
 
       return newState;
     case 'CLEAR_GRID':

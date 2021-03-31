@@ -3,6 +3,7 @@ import { useStore } from "../../../store";
 import { ClearIcon } from "../ClearIcon"
 import { FibonacciCell, FibonacciRow, gridCountX, gridCountY } from '../../../store/rootState/fibonacciGame';
 import styled from "styled-components";
+import { timeout } from '../../../utils/timeout';
 
 const gridWidth = 800;
 const gridHeight = 600;
@@ -83,6 +84,12 @@ export function Grid(props) {
   const { state, dispatch } = useStore();
   const { fibonacciGame } = state;
 
+  const onCellClick = async (indexY, indexX) => {
+    await dispatch({ type: 'CLICK_CELL', row: indexY, cell: indexX })
+    await timeout(10000);
+    await dispatch({ type: 'RUN_FIBONACCI' })
+  }
+
   const drawRow = (row: FibonacciRow, indexY) => {
     return row.cells.map((cell: FibonacciCell, indexX: number) => {
       return <Cell
@@ -90,9 +97,7 @@ export function Grid(props) {
         height={cellSizeY}
         padding={padding}
         color={cell.activeColor || 'white'}
-        onClick={() => dispatch(
-          { type: 'CLICK_CELL', row: indexY, cell: indexX }
-        )}
+        onClick={() => onCellClick(indexY, indexX)}
       >{cell.activeNumber || ''}</Cell>
     })
   }
