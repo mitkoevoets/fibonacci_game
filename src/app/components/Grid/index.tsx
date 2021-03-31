@@ -62,7 +62,7 @@ export function Grid(props) {
         onClick={() => dispatch(
           { type: 'CLICK_CELL', row: indexY, cell: indexX }
         )}
-      >{cell.activeNumber || 0}</Cell>
+      >{cell.activeNumber || ''}</Cell>
     })
   }
 
