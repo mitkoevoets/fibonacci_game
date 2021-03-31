@@ -72,6 +72,10 @@ const Cell = styled.span`
   cursor: pointer;
   font-size: 10px;
   line-height: 0.8;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
 `
 
 
