@@ -31,7 +31,20 @@ export default (state: FibonacciGame, action) => {
     case 'TRIGGER_COOLDOWN':
       newState.grid = newState.grid.map((row, index) => {
         row.cells = row.cells.map((cell): FibonacciCell => {
-          cell.activeColor = undefined;
+          /**
+           * Check forward
+           */
+
+          /**
+           * Check backward
+           */
+
+          /**
+           * Check up
+           */
+          /**
+           * Check down
+           */
 
           return cell;
         })
@@ -41,7 +54,15 @@ export default (state: FibonacciGame, action) => {
 
       return newState;
     case 'TRIGGER_FIBONACCI':
-      console.log('321ewds32wq')
+      newState.grid = newState.grid.map((row, index) => {
+        row.cells = row.cells.map((cell): FibonacciCell => {
+          cell.activeColor = undefined;
+
+          return cell;
+        })
+
+        return row;
+      })
 
       return newState;
     case 'CLEAR_GRID':

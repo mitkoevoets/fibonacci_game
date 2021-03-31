@@ -6,7 +6,7 @@ export function Dashboard() {
   return (
     <>
       <Helmet>
-        <title>Resultaten</title>
+        <title>Fibonacci</title>
         <meta name="description" content="Fibonacci Game" />
       </Helmet>
       <div id={'page-top wrapper'}>
