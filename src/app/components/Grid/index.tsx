@@ -9,44 +9,64 @@ const gridHeight = 600;
 
 const gridMarginX = gridWidth / 16;
 const gridMarginY = gridHeight / 16;
-const innerGridWidth = gridWidth - gridMarginX * 2;
-const innerGridHeight = gridHeight - gridMarginY * 2;
+const innerGridWidth = gridWidth - (gridMarginX * 2);
+const innerGridHeight = gridHeight - (gridMarginY * 2);
 
-const padding = 2;
+const padding = 1;
 const cellSizeX = (innerGridWidth / gridCountX) - padding;
 const cellSizeY = (innerGridHeight / gridCountY) - padding;
 
 const Container = styled.div`
   width: ${gridWidth}px;
   height: ${gridHeight}px;
-  background-color: #c529cf;
+  background-color: #373737;
 `
 
 const Wrapper = styled.div`
-  position: relative;
+  background-color: #c529cf;
 `
 
 interface CellProps {
-  x: number; y: number; width: number; height: number; color: string
+  width: number; height: number; padding: number; color: string
 }
 
+const RowWrapper = styled.div`
+  text-align: center;
+  line-height: 0.1;
+  height: ${(props: { height: number }) => props.height}px;
+`
+
 const Cell = styled.span`
-  position: absolute;
-  left: ${(props: CellProps) => props.x}px;
-  top: ${(props: CellProps) => props.y}px;
+  display: inline-block;
   width: ${(props: CellProps) => props.width}px;
   height: ${(props: CellProps) => props.height}px;
+  margin: ${(props: CellProps) => props.padding}px;
   background-color: ${(props: CellProps) => props.color};
 `
 
+const drawRow = (row: FibonacciRow) => {
+  return row.cells.map((cell: FibonacciCell, indexX: number) => {
+    return <Cell
+      width={cellSizeX}
+      height={cellSizeY}
+      padding={padding}
+      color={cell.activeColor || 'white'}
+    >{cell.activeNumber || ''}</Cell>
+  })
+}
+
 const drawGrid = (grid: FibonacciRow[]) => {
   return grid.map((row: FibonacciRow, indexY: number) => {
+    return (
+      <RowWrapper height={cellSizeY + (padding * 2)}>
+        {drawRow(row)}
+      </RowWrapper>
+    )
     return row.cells.map((cell: FibonacciCell, indexX: number) => {
       return <Cell
-        x={(cellSizeX + padding) * indexX}
-        y={(cellSizeY + padding) * indexY}
         width={cellSizeX}
         height={cellSizeY}
+        padding={padding}
         color={cell.activeColor || 'white'}
       >{cell.activeNumber || ''}</Cell>
     })
