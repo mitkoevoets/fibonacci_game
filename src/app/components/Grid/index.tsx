@@ -49,7 +49,7 @@ const GridWrapper = styled.div`
   position: relative;
   width: ${gridWidth}px;
   height: ${gridHeight}px ;
-  padding: ${gridMarginY - (padding*2)}px ${gridMarginX - (padding*2)}px;
+  padding: ${gridMarginY}px ${gridMarginX}px;
 `
 
 interface CellProps {
