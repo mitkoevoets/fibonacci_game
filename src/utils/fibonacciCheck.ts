@@ -68,6 +68,9 @@ export function getNeighbours(index: number, row: FibonacciRow, direction: strin
   }
 
   if(direction === 'down') {
+    console.log(' sadasdas')
+    console.log(index)
+    console.log(verticalRow)
     return verticalRow.slice(index, index + count)
   }
 

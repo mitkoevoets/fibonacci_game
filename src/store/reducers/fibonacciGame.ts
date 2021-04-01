@@ -52,39 +52,40 @@ export default (state: FibonacciGame, action) => {
 
       newState.grid = newState.grid.map((row, rowIndex) => {
         row.cells = row.cells.map((cell: FibonacciCell): FibonacciCell => {
-          const verticalRow: FibonacciCell[] = state.grid.map((row): FibonacciCell => {
+          const verticalRow: FibonacciCell[] = state.grid.map((row, rowIndex): FibonacciCell => {
             return row.cells[cell.cellNumber];
           })
 
-          // /**
-          //  * Check forward
-          //  */
-          // fibonacciMatched = fibonacciCheck(
-          //   cell, getNeighbours(cell.cellNumber, row)
-          // )
-          // if(fibonacciMatched){
-          //   fibonacciMatches = [...fibonacciMatches, ...fibonacciMatched]
-          // }
-          //
-          // /**
-          //  * Check backward
-          //  */
-          // fibonacciMatched = fibonacciCheck(
-          //   cell, getNeighbours(cell.cellNumber, row, 'backward')
-          // )
-          // if(fibonacciMatched){
-          //   fibonacciMatches = [...fibonacciMatches, ...fibonacciMatched]
-          // }
-
-          if(cell.cellNumber === 7) {
-            console.log('sss')
-            console.log(getNeighbours(cell.cellNumber, row,'backward', verticalRow))
+          /**
+           * Check forward
+           */
+          fibonacciMatched = fibonacciCheck(
+            cell, getNeighbours(cell.cellNumber, row)
+          )
+          if(fibonacciMatched){
+            fibonacciMatches = [...fibonacciMatches, ...fibonacciMatched]
           }
+
+          /**
+           * Check backward
+           */
+          fibonacciMatched = fibonacciCheck(
+            cell, getNeighbours(cell.cellNumber, row, 'backward')
+          )
+          if(fibonacciMatched){
+            fibonacciMatches = [...fibonacciMatches, ...fibonacciMatched]
+          }
+
+          // if(cell.cellNumber === 7) {
+          //   console.log('sss')
+          //   // console.log(verticalRow)
+          //   console.log(getNeighbours(rowIndex, row,'down', verticalRow))
+          // }
           /**
            * Check up
            */
           fibonacciMatched = fibonacciCheck(
-            cell, getNeighbours(cell.cellNumber, row, 'up', verticalRow)
+            cell, getNeighbours(rowIndex, row, 'up', verticalRow)
           )
           if(fibonacciMatched){
             fibonacciMatches = [...fibonacciMatches, ...fibonacciMatched]
@@ -94,7 +95,7 @@ export default (state: FibonacciGame, action) => {
            * Check down
            */
           fibonacciMatched = fibonacciCheck(
-            cell, getNeighbours(cell.cellNumber, row, 'down')
+            cell, getNeighbours(rowIndex, row, 'down', verticalRow)
           )
           if(fibonacciMatched){
             fibonacciMatches = [...fibonacciMatches, ...fibonacciMatched]
