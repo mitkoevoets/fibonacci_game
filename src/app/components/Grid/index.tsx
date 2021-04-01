@@ -4,6 +4,7 @@ import { ClearIcon } from "../ClearIcon"
 import { FibonacciCell, FibonacciRow, gridCountX, gridCountY } from '../../../store/rootState/fibonacciGame';
 import styled from "styled-components";
 import { timeout } from '../../../utils/timeout';
+import { ConfettiButton } from '../ConfettiButton';
 
 const gridWidth = 800;
 const gridHeight = 600;
@@ -136,6 +137,7 @@ export function Grid(props) {
           </div>
           <div className="col-sm">
             <ClearIcon />
+            <ConfettiButton />
           </div>
         </div>
       </div>
