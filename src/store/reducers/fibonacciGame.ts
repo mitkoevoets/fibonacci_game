@@ -76,11 +76,6 @@ export default (state: FibonacciGame, action) => {
             fibonacciMatches = [...fibonacciMatches, ...fibonacciMatched]
           }
 
-          // if(cell.cellNumber === 7) {
-          //   console.log('sss')
-          //   // console.log(verticalRow)
-          //   console.log(getNeighbours(rowIndex, row,'down', verticalRow))
-          // }
           /**
            * Check up
            */

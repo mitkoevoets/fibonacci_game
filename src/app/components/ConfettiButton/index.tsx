@@ -4,10 +4,7 @@ import * as React from 'react';
 import { useStore } from "../../../store";
 import JSConfetti from 'js-confetti'
 
-
-
 export function ConfettiButton() {
-  const { dispatch } = useStore();
   const jsConfetti = new JSConfetti()
 
 

@@ -8,15 +8,6 @@ function fibonacciMatch(fibonacciRange: number[], cellRange: FibonacciCell[]): b
 
   let match: boolean = true;
 
-  if (cellRange[0].activeNumber === 1) {
-    // console.log('cellRange')
-    // console.log(cellRange[0])
-    // console.log(cellRange[1])
-    // console.log(cellRange[2])
-    // console.log(cellRange[3])
-    // console.log(cellRange[4])
-  }
-
   cellRange.forEach((cell: FibonacciCell, index) => {
     if (fibonacciRange[index] !== cell.activeNumber) {
       match = false;
@@ -68,9 +59,6 @@ export function getNeighbours(index: number, row: FibonacciRow, direction: strin
   }
 
   if(direction === 'down') {
-    console.log(' sadasdas')
-    console.log(index)
-    console.log(verticalRow)
     return verticalRow.slice(index, index + count)
   }
 
