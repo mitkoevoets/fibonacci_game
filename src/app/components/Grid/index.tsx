@@ -90,6 +90,8 @@ export function Grid(props) {
     await dispatch({ type: 'TRIGGER_COOLDOWN' })
     await timeout(800);
     await dispatch({ type: 'TRIGGER_FIBONACCI' })
+    await timeout(2500);
+    await dispatch({ type: 'TRIGGER_FIBONACCI_COOLDOWN' })
   }
 
   const drawRow = (row: FibonacciRow, indexY) => {

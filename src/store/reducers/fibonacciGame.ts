@@ -2,6 +2,9 @@ import { FibonacciCell, FibonacciGame, gridCountX, gridCountY } from '../rootSta
 import { initGrid } from '../rootState/fibonacciGame/initGrid';
 import { fibonacciCheck, getNeighbours } from '../../utils/fibonacciCheck';
 
+const cellChangeColor = '#f1ee39';
+const cellMatchedColor = '#3ff139';
+
 export default (state: FibonacciGame, action) => {
   let newState = { ...state };
 
@@ -10,7 +13,6 @@ export default (state: FibonacciGame, action) => {
       /**
        * Adjust numbers
        */
-      const cellChangeColor = '#f1ee39';
 
       newState.grid[action.row].cells = newState.grid[action.row].cells.map((cell) => {
         cell.activeNumber = cell.activeNumber ? cell.activeNumber + 1 : 1;
@@ -33,7 +35,9 @@ export default (state: FibonacciGame, action) => {
     case 'TRIGGER_COOLDOWN':
       newState.grid = newState.grid.map((row, index) => {
         row.cells = row.cells.map((cell): FibonacciCell => {
-          cell.activeColor = undefined;
+          if(cell.activeColor === cellChangeColor) {
+            cell.activeColor = undefined;
+          }
 
           return cell;
         })
@@ -82,12 +86,26 @@ export default (state: FibonacciGame, action) => {
         return row;
       })
 
-      const cellMatchedColor = '#3ff139';
 
       console.log('fibonacciMatches')
       console.log(fibonacciMatches)
       fibonacciMatches.forEach((cell) => {
         newState.grid[cell.rowNumber].cells[cell.cellNumber].activeColor = cellMatchedColor;
+      })
+
+      return newState;
+    case 'TRIGGER_FIBONACCI_COOLDOWN':
+      newState.grid = newState.grid.map((row, index) => {
+        row.cells = row.cells.map((cell): FibonacciCell => {
+          if(cell.activeColor === cellMatchedColor) {
+            cell.activeColor = undefined;
+            cell.activeNumber = undefined;
+          }
+
+          return cell;
+        })
+
+        return row;
       })
 
       return newState;

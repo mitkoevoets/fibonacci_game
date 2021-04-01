@@ -10,4 +10,7 @@ export type AppActions =
   | {
   type: 'TRIGGER_FIBONACCI';
 }
+  | {
+  type: 'TRIGGER_FIBONACCI_COOLDOWN';
+}
   | { type: 'CLEAR_GRID' };
