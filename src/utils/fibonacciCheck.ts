@@ -57,11 +57,19 @@ export function fibonacciCheck(cell: FibonacciCell, cellsToCompare: FibonacciCel
   return undefined;
 }
 
-export function getNeighbours(index: number, row: FibonacciRow, direction: string = 'forward', count: number = 5): FibonacciCell[] {
+export function getNeighbours(index: number, row: FibonacciRow, direction: string = 'forward', verticalRow: FibonacciCell[] = [], count: number = 5): FibonacciCell[] {
   // const cells = direction === 'backward' ? row.cells.reverse() : row.cells;
+  if(direction === 'forward') {
+    return row.cells.slice(index, index + count);
+  }
+
   if(direction === 'backward') {
     return row.cells.slice((index + 1) - count, index + 1).reverse()
   }
 
-  return row.cells.slice(index, index + count);
+  if(direction === 'down') {
+    return verticalRow.slice(index, index + count)
+  }
+
+  return verticalRow.slice((index + 1) - count, index + 1).reverse()
 }
