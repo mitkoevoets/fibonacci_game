@@ -106,11 +106,10 @@ export default (state: FibonacciGame, action) => {
 
         return row;
       })
-      // console.log('fibonacciMatches')
-      // console.log(fibonacciMatches)
 
       fibonacciMatches.forEach((cell) => {
         newState.grid[cell.rowNumber].cells[cell.cellNumber].activeColor = cellMatchedColor;
+        newState.score++;
       })
 
       return newState;
@@ -130,7 +129,7 @@ export default (state: FibonacciGame, action) => {
 
       return newState;
     case 'CLEAR_GRID':
-      newState = { grid: initGrid(gridCountX, gridCountY) };
+      newState = { grid: initGrid(gridCountX, gridCountY), score: 0 };
 
       return newState;
     default:

@@ -13,6 +13,7 @@ export interface FibonacciRow {
 
 export interface FibonacciGame {
   grid: FibonacciRow[];
+  score: number
 }
 
 export const gridCountX = 10;
@@ -22,4 +23,5 @@ export const emptyGrid = initGrid(gridCountX, gridCountY);
 
 export const fibonacciGameRootState: FibonacciGame = {
   grid: emptyGrid,
+  score: 0,
 };

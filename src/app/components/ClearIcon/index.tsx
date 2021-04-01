@@ -15,7 +15,7 @@ export function ClearIcon() {
       aria-expanded="false"
       onClick={() => dispatch({ type: 'CLEAR_GRID' })}
     >
-      <FontAwesomeIcon icon={faBan} style={{ color: 'red' }} /> CLEAR GRID
+      <FontAwesomeIcon icon={faBan} style={{ color: 'red' }} /> RESTART
     </a>
   );
 }

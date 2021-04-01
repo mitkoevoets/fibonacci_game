@@ -127,8 +127,17 @@ export function Grid(props) {
   return (
     <div className="card shadow mb-4">
       <div className="card-header py-3">
-        <h6 className="font-weight-bold text-primary">TEXT</h6>
-        <ClearIcon />
+        <div className="row">
+          <div className="col-sm">
+            <h6 className="font-weight-bold text-primary">Fibonacci Game</h6>
+          </div>
+          <div className="col-sm">
+            Score: {fibonacciGame.score}
+          </div>
+          <div className="col-sm">
+            <ClearIcon />
+          </div>
+        </div>
       </div>
       <Container className="card-body">
         <Background>
