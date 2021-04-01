@@ -1,4 +1,4 @@
-import { initGrid } from "./initGrid";
+import { initGrid } from './initGrid';
 
 export interface FibonacciCell {
   activeColor: string | undefined;
@@ -13,7 +13,7 @@ export interface FibonacciRow {
 
 export interface FibonacciGame {
   grid: FibonacciRow[];
-  score: number
+  score: number;
 }
 
 export const gridCountX = 50;

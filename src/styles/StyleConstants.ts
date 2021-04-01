@@ -1,2 +1,1 @@
-export enum StyleConstants {
-}
+export enum StyleConstants {}

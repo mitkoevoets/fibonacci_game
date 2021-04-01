@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { GlobalStyle } from '../styles/global-styles';
+import { Dashboard } from './pages/Dashboard';
 import './style/bootstrap.min.css';
 import './style/sb-admin.css';
-import { Dashboard } from "./pages/Dashboard";
 
 export function App() {
   return (

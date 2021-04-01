@@ -1,6 +1,5 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
 import { getIntialState, persistState } from '../utils/persist-state';
-import { applyMiddleware } from './middleware';
 import { ProviderValueInterface } from './ProviderValueInterface';
 import reducer from './reducers';
 import { rootState, RootState } from './rootState';
@@ -31,9 +30,7 @@ export default function Provider({ children }) {
   useEffect(() => persistState(STORAGE_KEY, state), [state]);
 
   return (
-    <Context.Provider value={{ state, dispatch }}>
-      {children}
-    </Context.Provider>
+    <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>
   );
 }
 

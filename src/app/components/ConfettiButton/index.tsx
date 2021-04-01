@@ -1,12 +1,10 @@
 import { faAirFreshener } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import JSConfetti from 'js-confetti';
 import * as React from 'react';
-import { useStore } from "../../../store";
-import JSConfetti from 'js-confetti'
 
 export function ConfettiButton() {
-  const jsConfetti = new JSConfetti()
-
+  const jsConfetti = new JSConfetti();
 
   return (
     <a
@@ -17,7 +15,8 @@ export function ConfettiButton() {
       aria-expanded="false"
       onClick={() => jsConfetti.addConfetti()}
     >
-      <FontAwesomeIcon icon={faAirFreshener} style={{ color: 'deeppink' }} /> CONFETTI
+      <FontAwesomeIcon icon={faAirFreshener} style={{ color: 'deeppink' }} />{' '}
+      CONFETTI
     </a>
   );
 }

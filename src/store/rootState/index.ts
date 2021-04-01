@@ -1,4 +1,4 @@
-import { FibonacciGame, fibonacciGameRootState } from "./fibonacciGame";
+import { FibonacciGame, fibonacciGameRootState } from './fibonacciGame';
 
 export interface RootState {
   fibonacciGame: FibonacciGame;

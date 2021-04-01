@@ -1,7 +1,7 @@
 import { faBan } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
-import { useStore } from "../../../store";
+import { useStore } from '../../../store';
 
 export function ClearIcon() {
   const { dispatch } = useStore();
