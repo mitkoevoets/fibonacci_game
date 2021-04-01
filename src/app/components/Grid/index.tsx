@@ -79,6 +79,9 @@ const Cell = styled.span`
   user-select: none; /* Standard */
 `
 
+const InnerCell = styled.span`
+  ${(props: {activeNumber: number | undefined}) => !props.activeNumber ? 'color: white;' : ''};
+`
 
 export function Grid(props) {
   const { state, dispatch } = useStore();
@@ -103,7 +106,11 @@ export function Grid(props) {
         padding={padding}
         color={cell.activeColor || 'white'}
         onClick={() => onCellClick(indexY, indexX)}
-      >{cell.activeNumber || ''}</Cell>
+      >
+        <InnerCell activeNumber={cell.activeNumber}>
+          {cell.activeNumber || 0}
+        </InnerCell>
+      </Cell>
     })
   }
 
