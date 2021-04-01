@@ -63,11 +63,15 @@ export default (state: FibonacciGame, action) => {
             fibonacciMatches = [...fibonacciMatches, ...fibonacciMatched]
           }
 
+          if(cell.cellNumber === 7) {
+            console.log('sss')
+            console.log(getNeighbours(cell.cellNumber, row, 'backward'))
+          }
           /**
            * Check backward
            */
           fibonacciMatched = fibonacciCheck(
-            cell, getNeighbours(cell.cellNumber, row, 'backwards')
+            cell, getNeighbours(cell.cellNumber, row, 'backward')
           )
           if(fibonacciMatched){
             fibonacciMatches = [...fibonacciMatches, ...fibonacciMatched]
@@ -85,6 +89,8 @@ export default (state: FibonacciGame, action) => {
 
         return row;
       })
+      // console.log('fibonacciMatches')
+      // console.log(fibonacciMatches)
 
       fibonacciMatches.forEach((cell) => {
         newState.grid[cell.rowNumber].cells[cell.cellNumber].activeColor = cellMatchedColor;
