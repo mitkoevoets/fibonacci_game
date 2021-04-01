@@ -86,9 +86,6 @@ export default (state: FibonacciGame, action) => {
         return row;
       })
 
-
-      console.log('fibonacciMatches')
-      console.log(fibonacciMatches)
       fibonacciMatches.forEach((cell) => {
         newState.grid[cell.rowNumber].cells[cell.cellNumber].activeColor = cellMatchedColor;
       })
